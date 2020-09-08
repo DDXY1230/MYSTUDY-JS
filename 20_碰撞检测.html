@@ -40,10 +40,10 @@
     let div1 = document.getElementById('div1')
     let img1 = document.getElementById('img1')
 
-    drag(div1)
+    drag(div1, img1)
     // drag(img1)
 
-    function drag(obj) {
+    function drag(obj, obj2) {
 
         obj.onmousedown = function (ev) {
             let e = ev || event
@@ -81,15 +81,12 @@
                     (dis.y + elPosi.y) > document.documentElement.clientHeight - obj.offsetHeight ?
                     document.documentElement.clientHeight - obj.offsetHeight : (dis.y + elPosi.y)
                 // 移动的距离加上元素初始位置，即为当前位置
-                if ((T + obj.offsetHeight > 300 && T < 300 + img1.offsetHeight) && (L > 500 - obj.offsetWidth &&
-                        L < 500 + img1
-                        .offsetWidth)) {
-                    console.log('y轴方向发生碰撞了')
-                }
-                if ((L + obj.offsetWidth > 500 && L < 500 + img1.offsetWidth) && (T > 300 - obj.offsetHeight &&
-                        T < 300 + img1
-                        .offsetHeight)) {
-                    console.log('x方向发生了碰撞')
+                if (
+                    (T + obj.offsetHeight > obj2.offsetTop &&
+                        T < obj2.offsetTop + obj2.offsetHeight) &&
+                    (L > obj2.offsetLeft - obj.offsetWidth &&
+                        L < obj2.offsetLeft + obj2.offsetWidth)) {
+                    console.log('发生碰撞了')
                 }
                 obj.style.left = L + 'px'
                 obj.style.top = T + 'px'
