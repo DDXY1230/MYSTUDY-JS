@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body style="height: 3000px;">
+    <div id="div1"></div>
+    <script>
+        let div1 = document.getElementById('div1')
+        /*
+        ie/chrome: onmousewheel
+
+            event.wheelDelta
+            向上滚动 值  120
+            向下滚动 值  -120
+
+        ----------------------------------
+        火狐浏览器没有onmousewheel,但是也不会报错
+        只是认为是一个自定义事件，
+        所以在火狐下面滚轮事件是：DOMMouseScroll,并且必须用addEventlistener
+        火狐下面识别向上乡下滚动  ev.detail 
+            向上： -3
+            向下： 3
+
+        */
+        div1.onmousewheel = fn
+
+
+        /*
+        return false阻止的是obj.on事件名称=fn 所触发的默认行为，addEventlistener 绑定的
+        事件需要用event下面的prventDefault()来阻止
+            当时ie浏览器下面的attachEvent仍然用的是return false
+        */
+        if (div1.addEventListener) {
+            // 如果不做判断ie就会报错，因为下面没有addEventListener，DOMMouseScroll
+            // 标准浏览器进来之后绑定一个不存在的也没关系
+            div1.addEventListener('DOMMouseScroll', fn, false) // 为了兼容火狐浏览器
+        }
+
+        function fn(ev) {
+            let e = ev || event
+            console.log(e.wheelDelta)
+            let b = true // 默认向上滚动
+            if (e.wheelDelta) { // 说明是ie/chrome浏览器
+                b = e.wheelDelta > 0 ? true : false
+            } else {
+                b = e.detail < 0 ? true : false
+            }
+            if (b) {
+                this.style.height = this.offsetHeight - 10 + 'px'
+            } else {
+                this.style.height = this.offsetHeight + 10 + 'px'
+            }
+            if (e.preventDefault) {
+                e.preventDefault()
+            }
+            return false // 阻止默认行为，不然会导致页面body的滚动条也发生滚动
+        }
+    </script>
+</body>
+
+</html>
