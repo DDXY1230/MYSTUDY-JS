@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        cookie: 当用户访问某个网页时，我们可以通过coolie来访问者电脑上存储数据，
+        1.不同的浏览器存放的cookie位置不一样，也是不能通用的
+        2.cookie的存储必须加以区分，是以域名的形式进行区分的
+        3.cookie可以设置名字，json形式
+        4.一个域名下存放的cookie 的个数是有限制的，不同的浏览器的存放的个数不一样
+        5.cookie存放的内容有限
+        6.想长时间存放coolie，需要设置一个过期时间,默认是临时存储，当浏览器关闭时自动清除
+        本地本文件存不了
+        获取cookie是一个字符串，通过分号加空格相连结
+        内容组号用编码存放，encodeURI 编码 decodeURI 解码
+        */
+        let oDate = new Date()
+        oDate.setDate(oDate.getDate() + 5)
+        document.cookie = 'username = leo'
+        document.cookie = 'name=' + encodeURI('leo\n你好') + ';expires=' + oDate.toGMTString() //后面的日期必须转换成字符串格式的
+        console.log(document.cookie)
+
+        // username=leo; age=18
+        //设置coolie
+        function setCookie(key, value, t) {
+            let oDate = new Date()
+            oDate.setDate(oDate.getDate() + t)
+            document.cookie = key + '=' + value + ';expires=' + oDate.toGMTString()
+        }
+        //取cookie
+        function getCookie(key) {
+            let arr1 = document.cookie.split('; ')
+            for (let i = 0; i < arr1.length; i++) {
+                let arr2 = arr1[i].split('=')
+                if (arr2[0] === key) {
+                    return decodeURI(arr2[1])
+                }
+            }
+        }
+        //删除cookie的某个值
+        function delCoolie(key) {
+            setCookie(key, '', -1) // 设置-1过期时间是昨天，就移除了
+        }
+        console.log(getCookie('age'))
+    </script>
+</body>
+
+</html>
