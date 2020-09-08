@@ -24,6 +24,27 @@
         top: 0;
         left: 0;
     }
+
+    #div3 {
+        width: 500px;
+        height: 500px;
+        position: absolute;
+        left: 50px;
+        top: 10px;
+        background-color: green;
+        overflow: hidden;
+    }
+
+    #div4 {
+        height: 1500px;
+        background: red;
+        position: absolute;
+        top: 0;
+    }
+
+    p {
+        padding: 30px;
+    }
 </style>
 
 <body>
@@ -31,22 +52,50 @@
     <div id="div1">
         <div id="div2"></div>
     </div>
+    <div id="div3">
+        <div id="div4">
+            <p>11</p>
+            <p>11</p>
+            <p>11</p>
+            <p>11</p>
+            <p>22</p>
+            <p>22</p>
+            <p>22</p>
+            <p>22</p>
+            <p>22</p>
+            <p>22</p>
+            <p>33</p>
+            <p>33</p>
+            <p>33</p>
+            <p>33</p>
+            <p>442323</p>
+
+
+        </div>
+    </div>
     <script>
         let div1 = document.getElementById('div1')
         let div2 = document.getElementById('div2')
+        let div3 = document.getElementById('div3')
+        let div4 = document.getElementById('div4')
         div2.onmousedown = function (ev) {
             let e = ev || event
             let disY = e.clientY - this.offsetTop
             document.onmousemove = function (ev) {
                 let e = ev || event
                 let T = e.clientY - disY
+                let iMaxTop = div1.offsetHeight - div2.offsetHeight
                 if (T < 0) {
                     T = 0
-                } else if (T > div1.offsetHeight - div2.offsetHeight) {
-                    T = div1.offsetHeight - div2.offsetHeight
+                } else if (T > iMaxTop) {
+                    T = iMaxTop
                 }
-
                 div2.style.top = T + 'px'
+                let iScale = T / iMaxTop
+                console.log(iScale)
+                console.log(div4.clientHeight)
+                console.log(div3.clientHeight)
+                div4.style.top = -iScale * (div4.clientHeight - div3.clientHeight) + 'px'
             }
             document.onmouseup = function (ev) {
                 let e = ev || event
