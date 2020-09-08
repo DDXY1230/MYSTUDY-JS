@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #div1 {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        position: absolute;
+        top: 300px;
+        left: 500px;
+    }
+</style>
+
+<body>
+    <div id="div1"></div>
+    <script>
+        let oDiv = document.getElementById('div1')
+        oDiv.onmousedown = function (ev) {
+            let e = ev || event
+            let divW = this.offsetWidth
+            let startMouseX = e.clientX
+            let divL = this.offsetLeft
+            let b = ''
+            if (startMouseX > this.offsetLeft + divW - 10) {
+                console.log('鼠标在右侧按下了')
+                b = 'right'
+            }
+            if (startMouseX < this.offsetLeft + 10) {
+                console.log('鼠标在左侧按下了')
+                b = 'left'
+            }
+            oDiv.onmousemove = function (ev) {
+                let e = ev || event
+                let disX = e.clientX - startMouseX
+                switch (b) {
+                    case 'right':
+                        oDiv.style.width = divW + disX + 'px'
+                        break
+                    case 'left':
+                        oDiv.style.width = divW - disX + 'px'
+                        oDiv.style.left = divL + disX + 'px'
+                        break
+
+                }
+            }
+            oDiv.onmouseup = function (ev) {
+                oDiv.onmousemove = null
+            }
+        }
+    </script>
+</body>
+
+</html>
