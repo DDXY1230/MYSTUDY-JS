@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	body {
+		height: 3000px;
+	}
+</style>
+
+<body>
+
+</body>
+
+</html>
+<script>
+	// <!-- 当一个事件发生的时候，浏览器会有自己的默认行为 -->
+	// 当前这个行为是如何触发的，然后在这个事件处理函数中返回return false就可以阻止事件的默认行为了
+	document.onkeydown = function (e) {
+		let ev = e || event
+		if (ev.keyCode === 40) {
+			return false // 当按下键的时候滚动条不会再 往下滚动了，已经成功阻止了事件默认行为
+		}
+	}
+
+
+	// oncontextmenu: 右键菜单（也就是环境菜单，常常右键的时候会根据环境不同形式不同的菜单项）也
+	//可以叫做上下文菜单
+	document.oncontextmenu = function (e) {
+		console.log(111)
+		return false // 阻止右键的系统默认菜单
+	}
+</script>

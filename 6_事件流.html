@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            padding: 20px;
+        }
+
+        .box1 {
+            background: red;
+
+        }
+
+        .box2 {
+            background: yellow;
+        }
+
+        .box3 {
+            background: green;
+        }
+
+        .box4 {
+            background: purple;
+            /* position: absolute;
+            width: 100px; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1" id="box1">1
+        <div class="box2" id="box2">2
+            <div class="box3" id="box3">3
+                <div class="box4" id="box4">4</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let box1 = document.querySelector('.box1')
+    let box2 = document.querySelector('.box2')
+    let box3 = document.querySelector('.box3')
+    let box4 = document.querySelector('.box4')
+    fn1 = function (e) {
+        console.log(e)
+        console.log('hhh')
+        console.dir(this)
+    }
+    // box1.onclick = fn1
+    // box2.onclick = fn1
+    // box3.onclick = fn1
+    // box4.onclick = fn1 // 单独点击box4 ，也会触发父级box3\box2\box1上的方法，跟样式没有半毛线关系
+    // 只跟html结构有关系
+    //事件冒泡：接受到事件以后会把所以接收到所有事件传播给父级，父级也可以往上传，一直到顶层。
+    // 向上冒泡如果中途没有事件执行或者事件被注释了，还是会跳过继续往上传播
+    box1.addEventListener('click', fn1, true)
+    box2.addEventListener('click', fn1, true)
+    box3.addEventListener('click', fn1, true)
+    box4.addEventListener('click', fn1, true)
+    // false: 冒泡 4-3-2-1
+    // true: 捕获 1-2-3-4
+</script>
+
+</html>

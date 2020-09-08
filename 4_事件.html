@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="text1" />
+    <input type="text" id="text2" />
+    <input type="text" id="text3" />
+    <input type="button" value="全选" id="btn">
+    <script>
+        // 焦点事件
+        window.onload = function () {
+            let text1 = document.querySelector('#text1')
+            let text2 = document.querySelector('#text2')
+            let text3 = document.querySelector('#text3')
+            let btn = document.querySelector('#btn')
+            text1.onfocus = function () {
+
+                if (this.value == '请输入') {
+                    this.value = ''
+                }
+            }
+            text1.onblur = function () {
+                if (this.value === '') {
+                    this.value = '请输入'
+                }
+            }
+            text2.focus() // 指定某个元素获取焦点
+            btn.onclick = function () {
+                console.log(1122)
+                text2.select() // 选择text2的文本内容
+            }
+        }
+    </script>
+</body>
+
+</html>

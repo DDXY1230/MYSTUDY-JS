@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<input type="text" id="text1">
+	<ul id="ul1"></ul>
+</body>
+
+</html>
+<script>
+	let text1 = document.getElementById('text1')
+	let ul1 = document.getElementById('ul1')
+	// text1.onkeydown = function () {
+	//     // alert(this.value)
+	//     console.log(this.value)//每次按下都会得到上一次的值说明按键事件发生在获取值的前面
+	// }
+	text1.onkeyup = function (e) {
+		let ev = e || event
+		if (this.value != '') {
+			if (ev.keyCode === 13 && ev.ctrlKey) { // 按下回车键并且ctrl键是按住的状态进行汇总
+				console.log(ev.ctrlKey)
+				let oli = document.createElement('li')
+				oli.innerHTML = this.value
+				if (ul1.children[0]) {
+					ul1.insertBefore(oli, ul1.children[0])
+				} else {
+					ul1.appendChild(oli)
+				}
+			}
+		}
+	}
+</script>

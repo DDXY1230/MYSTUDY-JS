@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #div1 {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        position: absolute;
+        display: none;
+    }
+</style>
+
+<body>
+    <div id="div1"></div>
+    <script>
+        let div1 = document.getElementById('div1')
+        document.oncontextmenu = function (ev) {
+            let e = ev || event
+            div1.style.display = 'block'
+            div1.style.left = e.clientX + 'px'
+            div1.style.top = e.clientY + 'px'
+            return false
+        }
+        document.onclick = function (e) {
+            div1.style.display = 'none'
+        }
+    </script>
+</body>
+
+</html>

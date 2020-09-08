@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width: 100px;
+            height: 300px;
+            border: 1px solid red;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="菜单" id="btn1">
+    <div class="box1"></div>
+</body>
+<script>
+    let btn1 = document.querySelector('#btn1')
+    let box1 = document.querySelector('.box1')
+    btn1.onclick = function (ev) {
+        let e = ev || event
+        console.log(e)
+        console.log(event)
+        box1.style.display = 'block'
+        e.cancelBubble = true // 阻止当前对象的当前事件向上冒泡，
+        //其他事件没有阻止的话还是会继续向上冒泡
+    }
+    document.onclick = function () {
+        box1.style.display = 'none'
+    }
+</script>
+
+</html>

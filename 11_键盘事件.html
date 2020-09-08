@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		/*
+        onkeydown:键盘按下的时候触发（都是小写）
+        onkeyup: 键盘案件抬起的时候触发
+				event.keyCode: 数字类型，对应的是相应的ascll码，键盘按钮的值
+
+				特殊功能键： 
+					 ctrlKey,shiftKey,altKey  这三个是布尔值
+					 当一个事件发生的时候，这三个是按下的状态那么就是true
+					 否则是false
+				        */
+		// document.onkeydown = function (ev) {
+		// 	// alert(1122)
+		// 	let e = ev || event
+		// 	alert(e.keyCode)
+		// }   
+		document.onclick = function (ev) {
+			let e = ev || event
+			console.log(ev.ctrlKey)
+		}
+	</script>
+</body>
+
+</html>

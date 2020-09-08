@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="height: 1000px;"></div>
+    <script>
+        let i = 0
+        window.onclick = function () {
+            document.title = i++
+        }
+        window.onscroll = function () {
+            // onscroll 按照间隔时间执行，拉的越快加的数据并不一定大，
+            console.log(i++)
+        }
+        window.onresize = function () {
+            // onresize 按照时间间隔调用更新，拉的快慢无关，大概是间隔5毫秒执行函数
+            console.log(i++)
+        }
+    </script>
+</body>
+
+</html>

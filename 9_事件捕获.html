@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fn1() {
+            console.log(1)
+        }
+
+        function fn2() {
+            console.log(2)
+        }
+
+        //ie:
+        // obj.attachEvent(事件名称，事件函数)
+        // documen.attachEvent('onclick', fn1)
+        //1.没有捕获，2.事件名称带有on
+
+
+        //标准：
+        //obj.addEventlistener(事件名称，事件函数，是否捕获) 第三个参数默认值false，不捕获就是冒泡
+        window.onload = function () {
+            document.addEventListener('click', fn1, false)
+
+
+            //
+            fn1()
+            fn1.call() //本质上没有区别，只是call可以传参，call方法的第二个参数就是参数列表，第一个是this指向，
+            //如果第一个参数传的是空（不传），那就照旧指向window
+            //
+
+
+            // ----------------------------------------------
+            // 一下做兼容处理
+            bind(document, 'click', fn1)
+
+            function bind(obj, ev, fn) {
+                if (obj.addEventListener) {
+                    obj.addEventListener(ev, fn, false)
+                } else {
+                    obj.attachEvent('on' + ev, function () {
+                        fn.call(obj)
+                    })
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function fn1() {
+      alert(1)
+    }
+
+    function fn2() {
+      alert(2)
+    }
+    // document.onclick = fn2
+    document.onclick = null // 普通事件的取消直接赋值null即可
+
+    //如果是通过attachEvent（ie浏览器）、addEventListener（标准浏览器）添加的事件
+    //attachEvent  取消的方法是： obj.dettachEvent('onclick', fn1)
+    // 注意attchEvent绑定的事件名称前面要加on，取消也一样加on。
+    //注意addEventListener事件名称前面不用加on
+
+    document.addEventListener('click', fn1)
+    document.addEventListener('click', fn2)
+    document.removeEventListener('click', fn1) // 取消事件
+  </script>
+</body>
+
+</html>

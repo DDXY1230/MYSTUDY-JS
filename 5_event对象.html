@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        // 事件对象必须在一个函数中调用才有用
+        // 火狐浏览器如何调用事件对象呢
+        // 事件对象是通过事件调用的第一个参数传进函数的
+        // 
+        function fn1(e) {
+            let ev = e || event
+            // 有些浏览器没有传e进来，只有一个全局的event对象，为了兼容处理必须或上后面的event
+            console.log(ev)
+        }
+        let box = document.querySelector('.box')
+        // box.onclick = function (e) {
+        //     let ev = e || event
+        //     console.log(ev)
+        // }
+        let i = 0
+        // onmousemove:当鼠标在一个元素上面移动的时候触发
+        //触发频率不是像素而是触发频率的是时间，很短的时间就会触发一次
+        document.onmousemove = function (e) {
+            let ev = e || event
+            document.title = i++
+            console.log(box)
+            let scroTop = document.documentElement.scrollTop || document.body.scrollTop
+            let scroLeft = document.documentElement.scrollLeft || document.body.scrollLeft
+            console.log('scrollTop', scroTop)
+            console.log('scroLeft', scroLeft)
+            box.style.left = (ev.clientX - 50 + scroTop) + 'px'
+            box.style.top = (ev.clientY - 50 + scroLeft) + 'px'
+        }
+    </script>
+</body>
+
+</html>

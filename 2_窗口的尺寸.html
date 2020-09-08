@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+
+        .box1 {
+            height: 1000px;
+            width: 100px;
+            background: blue;
+        }
+
+        .box2 {
+            height: 100px;
+            width: 100px;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        .box3 {
+            height: 230px;
+            width: 80px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="box1"></div>
+    <div class="box2">
+        <div class="box3"></div>
+    </div>
+    <script>
+        // 可视区的尺寸
+        console.log(document.documentElement.clientWidth)
+        console.log(document.documentElement.clientHeight)
+        let box = document.querySelector('.box')
+        console.log(box.clientWidth)
+        console.log(box.clientHeight)
+        // 滚动条滚动距离
+        document.onclick = function () {
+            // 有些浏览器只识别第一中方法，有些识别第二中，为了兼容两种都要写
+            console.log(document.documentElement.scrollTop)
+            console.log(document.body.scrollTop)
+            let scroTop = document.documentElement.scrollTop || document.body.scrollTop
+            console.log(scroTop)
+        }
+        //scrollHeight/scrollWidth获取盒子的实际高和宽，包括隐藏的部分
+        let box3 = document.querySelector('.box3')
+        console.log('box3', box3.scrollHeight)
+        console.log('box3', box3.scrollWidth)
+        // 文档高度
+        console.log(box3.offsetHeight)
+        console.log(document.documentElement.offsetHeight)
+        console.log(document.body.offsetHeight) //这个不算body的默认margin，所以比上面少16
+    </script>
+</body>
+
+</html>

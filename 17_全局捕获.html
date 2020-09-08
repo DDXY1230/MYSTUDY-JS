@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="按钮1" id="btn1">
+    <input type="button" value="按钮2" id="btn2">
+</body>
+<script>
+    let btn1 = document.getElementById('btn1')
+    // btn1.setCapture()   在ie下设置全局捕获，当前我们给一个元素设置全局捕获，
+    //以后这个元素就会监听之后的所有事件，
+    //全局捕获在火狐浏览器是有，但是么有在ie下面的那种效果，在Chrome浏览器下面没有
+    // 在其他浏览器可能报错，所有要做判断
+    btn1.onclick = function () {
+        console.log(1111)
+    }
+</script>
+
+</html>

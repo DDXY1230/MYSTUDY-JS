@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #div1 {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+    }
+</style>
+
+<body>
+
+    <!-- 不是所有的元素都可以接受键盘事件的，能够相应用户输入的元素，能够接受焦点的元素
+    就能接受键盘事件 -->
+    <!-- document 是可以接受焦点的 -->
+    <div id="div1"></div>
+</body>
+
+</html>
+<script>
+    let div1 = document.getElementById('div1')
+    document.onkeydown = function (e) {
+        let ev = e || event
+        console.log(ev.keyCode)
+        switch (ev.keyCode) {
+            case 37:
+                div1.style.left = div1.offsetLeft - 10 + 'px'
+                break
+            case 38:
+                div1.style.top = div1.offsetTop - 10 + 'px'
+                break
+            case 39:
+                div1.style.left = div1.offsetLeft + 10 + 'px'
+                break
+            case 40:
+                div1.style.top = div1.offsetTop + 10 + 'px'
+                break
+
+
+        }
+    }
+</script>

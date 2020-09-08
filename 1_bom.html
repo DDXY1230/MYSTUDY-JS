@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="按钮">
+    <input type="button" value="关闭">
+    <input type="button" value="浏览器信息">
+    <input type="button" value="地址栏信息">
+    <script>
+        let aInput = document.getElementsByTagName('input')
+        let awin;
+        aInput[0].onclick = function (e) {
+            console.log(e)
+            awin = window.open('http://www.baidu.com')
+        }
+        aInput[1].onclick = function (e) {
+            awin.close()
+            //可以关闭通过js打开的其他新窗口
+        }
+        aInput[2].onclick = function (e) {
+            //查看浏览器的信息
+            console.log(window.navigator.userAgent)
+        }
+        aInput[3].onclick = function (e) {
+            //查看地址栏信息
+            console.log(window.location)
+        }
+    </script>
+</body>
+
+</html>
