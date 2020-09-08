@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #div1 {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        background-color: red;
+    }
+
+    #img1 {
+        position: absolute;
+    }
+</style>
+
+<body>
+    sdfgsdgdfsg
+    <div id="div1">sdfsdfsdf</div>
+    <!-- 测试图片的拖拽 -->
+    <img src="./imgs/1.jpg" alt="" id="img1">
+</body>
+
+</html>
+<script>
+    /*
+	// 注意：
+	拖拽的时候如果有文字被选中，会在各种浏览器产生不同的问题，这个是浏览器的默认行为
+	为了阻止文字被拖拽的默认行为，标准浏览器只需在mousedown  中return false
+    ie浏览器需要做全局捕获掉
+    注意拖拽的元素要有绝对定位
+	*/
+    let div1 = document.getElementById('div1')
+    let img1 = document.getElementById('img1')
+
+    drag(div1)
+    drag(img1)
+
+    function drag(obj) {
+
+        obj.onmousedown = function (ev) {
+            let e = ev || event
+
+            let starMouse = { //鼠标按下立刻记录下鼠标的初始位置
+                x: e.clientX,
+                y: e.clientY
+            }
+            let elPosi = { // 鼠标按下立刻记录元素的初始位置
+                x: obj.offsetLeft,
+                y: obj.offsetTop
+            }
+
+            // 在ie下把一下事件捕获到div上面,就不会出现选中文字，导致文字被拖放，div却没有被拖动的现象
+            if (obj.setCapture) {
+                obj.setCapture()
+            }
+
+            document.onmousemove = function (ev) {
+                let e = ev || event
+                let moveMouse = {
+                    x: e.clientX,
+                    y: e.clientY
+                }
+                let dis = { // 计算移动的距离
+                    x: moveMouse.x - starMouse.x,
+                    y: moveMouse.y - starMouse.y
+                }
+                // 移动的距离加上元素初始位置，即为当前位置
+                obj.style.left = dis.x + elPosi.x + 'px'
+                obj.style.top = dis.y + elPosi.y + 'px'
+            }
+            document.onmouseup = function () {
+                document.onmousemove = null
+                document.onmouseup = null
+                // 在ie浏览器抬起之后可以照样选文字
+                if (obj.releaseCapture) {
+                    obj.releaseCapture()
+                }
+            }
+            return false // 阻止浏览器的默认行为，比如文章被选中的时候拖拽
+            //如果在ie下面阻止默认行为只能
+        }
+    }
+</script>

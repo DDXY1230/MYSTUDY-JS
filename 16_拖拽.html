@@ -13,6 +13,9 @@
 		position: absolute;
 		background-color: red;
 	}
+	#div2 {
+		position: absolute;
+	}
 </style>
 
 <body>
@@ -30,7 +33,7 @@
 	为了阻止文字被拖拽的默认行为，标准浏览器只需在mousedown  中return false
 	ie浏览器需要做全局捕获掉
 	*/
-	let div1 = document.getElementById('div1')
+	let div1 = document.getElementById('div2')
 	div1.onmousedown = function (ev) {
 		let e = ev || event
 
