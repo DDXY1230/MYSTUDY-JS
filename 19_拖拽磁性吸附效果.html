@@ -71,8 +71,9 @@
                     y: moveMouse.y - starMouse.y
                 }
                 // 在规定的范围内移动
-                let L = (dis.x + elPosi.x) <= 0 ? 0 :
-                    (dis.x + elPosi.x) > document.documentElement.clientWidth - obj.offsetWidth ?
+                // 左边小于100的时候一下子就吸附在左边，右边大于一定的时候一下子吸附在右边
+                let L = (dis.x + elPosi.x) <= 100 ? 0 :
+                    (dis.x + elPosi.x) > document.documentElement.clientWidth - obj.offsetWidth -200 ?
                     document.documentElement.clientWidth - obj.offsetWidth : (dis.x + elPosi.x)
                 let T = (dis.y + elPosi.y) <= 0 ? 0 :
                     (dis.y + elPosi.y) > document.documentElement.clientHeight - obj.offsetHeight ?

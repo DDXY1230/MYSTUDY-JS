@@ -15,6 +15,8 @@
     }
 
     #img1 {
+        top: 300px;
+        left: 500px;
         position: absolute;
     }
 </style>
@@ -39,7 +41,7 @@
     let img1 = document.getElementById('img1')
 
     drag(div1)
-    drag(img1)
+    // drag(img1)
 
     function drag(obj) {
 
@@ -71,15 +73,27 @@
                     y: moveMouse.y - starMouse.y
                 }
                 // 在规定的范围内移动
-                let L = (dis.x + elPosi.x) <= 0 ? 0 :
-                    (dis.x + elPosi.x) > document.documentElement.clientWidth - obj.offsetWidth ?
+                // 左边小于100的时候一下子就吸附在左边，右边大于一定的时候一下子吸附在右边
+                let L = (dis.x + elPosi.x) <= 100 ? 0 :
+                    (dis.x + elPosi.x) > document.documentElement.clientWidth - obj.offsetWidth - 200 ?
                     document.documentElement.clientWidth - obj.offsetWidth : (dis.x + elPosi.x)
                 let T = (dis.y + elPosi.y) <= 0 ? 0 :
                     (dis.y + elPosi.y) > document.documentElement.clientHeight - obj.offsetHeight ?
                     document.documentElement.clientHeight - obj.offsetHeight : (dis.y + elPosi.y)
                 // 移动的距离加上元素初始位置，即为当前位置
+                if ((T + obj.offsetHeight > 300 && T < 300 + img1.offsetHeight) && (L > 500 - obj.offsetWidth &&
+                        L < 500 + img1
+                        .offsetWidth)) {
+                    console.log('y轴方向发生碰撞了')
+                }
+                if ((L + obj.offsetWidth > 500 && L < 500 + img1.offsetWidth) && (T > 300 - obj.offsetHeight &&
+                        T < 300 + img1
+                        .offsetHeight)) {
+                    console.log('x方向发生了碰撞')
+                }
                 obj.style.left = L + 'px'
                 obj.style.top = T + 'px'
+
 
             }
             document.onmouseup = function () {
