@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="" list="valList">
+    <datalist id="valList">
+        <option value="javescript">javescript</option>
+        <option value="jave">jave</option>
+        <option value="css">css</option>
+        <option value="python">python</option>
+    </datalist>
+
+    <!-- //------------ -->
+    <details>
+        <summary>学习</summary>
+        <p>学习使人进步</p>
+    </details>
+    <details open>
+        <summary>生活</summary>
+        <p>安静的生活</p>
+    </details>
+    <!-- // ----------------- -->
+    <!-- dialog这个语义化标签存在兼容性 -->
+    <dialog open>
+        <dt>老师：</dt>
+        <dd>22 + 22 等于多少？</dd>
+
+        <dt>学生：</dt>
+        <dd>44</dd>
+
+        <dt>老师：</dt>
+        <dd>答对了</dd>
+    </dialog>
+    <!-- --------------------- -->
+    <address>该标签用来定义文章的作者信息</address>
+    <!-- ----------------------- -->
+    <mark>浏览器默认加标记颜色，可以自定义颜色</mark>
+    <!-- ------------------------- -->
+    <form action="" method="get">
+        用户：<input type="text" name="user_name" id="">
+        公钥：<keygen name="security" />
+    </form>
+    <!-- ---------------------------- -->
+    <!-- 可能存在兼容性 -->
+    <progress max="100" value="70">
+        <!-- 为了兼容看不到进度条的浏览器，看不到直接现实数字 -->
+        <span>70%</span>
+    </progress>
+</body>
+
+</html>
