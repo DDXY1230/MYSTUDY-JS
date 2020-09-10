@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="随机选彩票" id="input1">
+    <div id="div1"></div>
+    <script>
+        // 可以设置hasg值  ： url#xxxxx
+        // onhashchange: 改变hash值
+        let div1 = document.getElementById('div1')
+        let input1 = document.getElementById('input1')
+
+        let json = {}
+        input1.onclick = function () {
+            let dataArr = randonNum(35, 7)
+            let num = Math.random()
+            json[num] = dataArr
+            console.log('dataArr', dataArr)
+            div1.innerHTML = dataArr
+            window.location.hash = num
+        }
+        window.onhashchange = function () {
+            let num = window.location.hash.substring(1)
+            console.log(num)
+            console.log(window.location.hash)
+            console.log(json)
+            div1.innerHTML = json[num]
+        }
+
+        function randonNum(iAll, iNow) {
+            let arr = []
+            let newArr = []
+            for (let i = 1; i <= iAll; i++) {
+                arr.push(i)
+            }
+            for (let j = 0; j < iNow; j++) {
+                // splice 返回被剪切的数据，会改变原来的数组
+                newArr.push(arr.splice(Math.floor(Math.random() * arr.length), 1))
+            }
+            return newArr
+        }
+    </script>
+</body>
+
+</html>
