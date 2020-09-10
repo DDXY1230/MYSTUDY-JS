@@ -65,14 +65,39 @@
 
 
     <br>
-    <!-- 表单验证 -->
-    <input type="email">
-    <input type="tel">
-    <input type="url">
-    <input type="search">
-    <!-- 仿进度条 -->
-    <input type="range" step="2" min="0" max="10">
-    <input type="number">
+    <form action="">
+
+        <!-- 表单验证 -->
+        <!-- autocomplete="off" 自动完成，就是不保存先前的历史输入，清除里历史输入
+    autofocus :打开页面自动聚焦   
+    -->
+        <input type="text" name='name' autocomplete="off" autofocus>
+
+        <!-- pattern="\d{1,5}"约束格式，但是在前端很容易被别人修改掉绕过这层校验,如果在手机端就会相对好很多 -->
+        <input type="text" pattern="\d{1,5}">
+
+        <input type="email" required>
+        <input type="tel">
+        <input type="url">
+        <input type="search">
+
+        <!-- 仿进度条 -->
+        <input type="range" step="2" min="0" max="10">
+
+        <input type="number" placeholder="请输入数字">
+        <input type="color">
+        <input type="datetime">
+        <input type="datetime-local">
+        <input type="time">
+        <input type="date">
+        <input type="week">
+        <input type="month">
+        <input type="password">
+        <input type="submit" value="提交">
+
+        <!-- formaction='http//....' 这里可以单独再 写一个提交地址 formnovalidate:保存至草稿箱暂时规避验证（不验证） -->
+        <input type="submit" value="保存至草稿箱" formaction="" formnovalidate> 
+    </form>
 
 </body>
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1"></div>
+    <div id="box1" class="cla1 cla2 cla3"></div>
+    <div title="hello"></div>
+    <script>
+        let oDiv = document.querySelector('.box1') // 只能选中一个
+        console.log(oDiv)
+        let oDiv2 = document.querySelector('#box1')// 只能选中一个
+        console.log(oDiv2.classList) // 类似数组的对象
+        oDiv2.classList.add('cla4')// 添加
+        oDiv2.classList.remove('cla1')// 添加
+        oDiv2.classList.toggle('cla8') // 根据原来有没有进行添加或者删除
+        console.log(oDiv2.classList) // 类似数组的对象
+
+
+        let oDiv3 = document.querySelector('[title=hello]')// 只能选中一个
+        oDiv.style.background = "red"
+        oDiv2.style.background = "green"
+        oDiv3.style.background = "yellow"
+        
+        let divArr = document.querySelectorAll('div') // 选中多个，是个数组
+        console.dir(divArr)
+
+        let aDiv = document.getElementsByClassName('box1') // 获取到的是一个集合
+        console.log(aDiv[0] === oDiv) // true
+
+
+        
+    </script>
+</body>
+
+</html>
