@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    li {
+        list-style: none;
+        width: 100px;
+        height: 30px;
+        background: yellow;
+        margin: 10px;
+    }
+
+    div {
+        width: 300px;
+        height: 100px;
+        background: red;
+        margin: 200px;
+    }
+</style>
+
+<body>
+    <!-- 
+    onmouseleave和onmouseout的区别
+    1、onmouseleave、onmouseenter，鼠标进入到指定元素区域内触发事件，不支持冒泡，不包含子元素的区域。
+    2、onmouseout、onmouseover、鼠标进入指定元素触发事件，含子元素区域。
+ -->
+    <!--  
+        加draggable = 'true' 让原素可拖拽,此功能存在浏览器兼容性
+     -->
+    <!-- 被拖拽元素 -->
+    <img src="./imgs/1.jpg" id='img1' alt="">
+    <ul>
+        <li draggable="true">a</li>
+        <li draggable="true">b</li>
+        <li draggable="true">c</li>
+    </ul>
+    <!-- 目标元素 -->
+    <div id='div1'></div>
+    <!-- 
+        拖放事件存在兼容性问题
+        解决在火狐下的问题
+            必须设置dataTransfer对象的setData方法才可以拖拽除图片外的其他标签
+        dataTransfer对象：
+           setData() : 设置数据key和value（必须是字符串）
+           getDate() : 获取数据，根据key值，获取对应的value
+     -->
+
+    <script>
+        let oUl = document.getElementsByTagName('ul')[0]
+        let ali = oUl.getElementsByTagName('li')
+        let img1 = document.getElementById('img1')
+        let num = 0
+        for (let i = 0; i < ali.length; i++) {
+            ali[i].index = i
+            ali[i].ondragstart = function (ev) {
+                // let e = ev || event
+                // e.dataTransfer.setData(name, 'hello') // 写了这句在火狐上就可以拖拽了
+                // e.dataTransfer.setData('name', this.index)
+                let e = ev || window.event;
+                //ev.dataTransfer.setData('name','hello');
+                e.dataTransfer.setData('name', this.index);
+                // e.dataTransfer.effectAllowed = 'copy' // 设置鼠标样式
+                e.dataTransfer.effectAllowed = 'link' // 设置鼠标样式
+                // e.dataTransfer.setDragImage(ali[i], 0,0)
+                e.dataTransfer.setDragImage(img1, 0, 0) // 设置拖动时显示的图片
+                this.style.background = 'green'
+            }
+            ali[i].ondrag = function () {
+                // 只要在拖拽跟放开拖拽之间，这个函数连续触发
+                num++
+                // console.log(num)
+            }
+            ali[i].ondragend = function () {
+                this.style.background = 'pink'
+            }
+        }
+
+        // 目标元素
+        let div1 = document.getElementById('div1')
+        div1.ondragenter = function () {
+            console.log('有元素被拖进来了')
+        }
+        div1.ondragover = function (ev) {
+            let e = ev || event
+            // 在目标元素里面拖着移动时触发
+            // 要想触发ondrop时间就必须在ondragover当中阻止默认时间
+            // 不阻止就不会执行ondrop ,但会触发ondragleave
+            num++
+            // console.log(num)
+            // return false
+            e.preventDefault()
+        }
+        div1.ondragleave = function () {
+            console.log('有元素离开了')
+        }
+        div1.ondrop = function (ev) {
+            let e = ev || event
+            console.log('有元素在目标元素上释放了')
+            console.log(ev.dataTransfer.getData('name'))
+            console.log(ev.dataTransfer)
+            oUl.removeChild(ali[ev.dataTransfer.getData('name')])
+
+            // 删除完之后修改索引
+            for (let i = 0; i < ali.length; i++) {
+                ali[i].index = i
+            }
+        }
+        /*执行的顺序： 
+        drop不触发的时候
+        dragstart > drag > dragenter > dragover > dragleave > dragend
+
+        drop被触发的时候（dragover要阻止默认事件）
+        dragstart > drag > dragenter > dragover > drop > dragend
+
+        
+        
+        */
+    </script>
+</body>
+
+</html>
