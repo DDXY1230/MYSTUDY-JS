@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<script>
+    // 某些浏览器对新标签不兼容，处理的方式就是在头部写个script。然后加下面这句话
+    document.createElement('leo') // 为了做兼容
+    document.createElement('header') // 为了做兼容
+    document.createElement('aside') // 为了做兼容
+    document.createElement('footer') // 为了做兼容
+    document.createElement('leo') // 为了做兼容
+</script>
 
 <body>
     <input type="text" name="" id="" list="valList">
@@ -27,7 +35,7 @@
     </details>
     <!-- // ----------------- -->
     <!-- dialog这个语义化标签存在兼容性 -->
-    <dialog open>
+    <dialog close>
         <dt>老师：</dt>
         <dd>22 + 22 等于多少？</dd>
 
@@ -52,6 +60,20 @@
         <!-- 为了兼容看不到进度条的浏览器，看不到直接现实数字 -->
         <span>70%</span>
     </progress>
+    <!-- ------------------------------ -->
+    <leo>哈哈哈哈</leo>
+
+
+    <br>
+    <!-- 表单验证 -->
+    <input type="email">
+    <input type="tel">
+    <input type="url">
+    <input type="search">
+    <!-- 仿进度条 -->
+    <input type="range" step="2" min="0" max="10">
+    <input type="number">
+
 </body>
 
 </html>
