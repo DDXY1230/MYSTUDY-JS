@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    li {
+        list-style: none;
+        width: 100px;
+        height: 30px;
+        background: yellow;
+        margin: 10px;
+    }
+
+    div {
+        width: 300px;
+        height: 100px;
+        background: red;
+        margin: 200px;
+    }
+</style>
+
+<body>
+    <div id='div1'>将文件拖拽到此区域</div>
+    <ul></ul>
+    <script>
+        // 目标元素
+        let oUl = document.getElementsByTagName('ul')[0]
+        let div1 = document.getElementById('div1')
+        div1.ondragenter = function () {
+            console.log('有元素被拖进来了')
+            div1.innerText = '可以释放了'
+        }
+        div1.ondragover = function (ev) {
+            let e = ev || event
+            e.preventDefault()
+        }
+        div1.ondragleave = function () {
+            console.log('有元素离开了')
+            div1.innerText = '将文件拖拽到此区域22'
+        }
+        div1.ondrop = function (ev) { // 在放的那瞬间
+            let e = ev || event
+
+            div1.innerText = '将文件拖拽到此区域11'
+
+            let fs = e.dataTransfer.files; // 从外部拖过来的文件
+            // 单张上传
+            if (fs[0].type.indexOf('image') !== -1) { // 此处限定只能拖进来的是图片才接受数据
+                console.log(fs)
+                // 读取拖过来的文件
+                let fd = new FileReader();
+                fd.readAsDataURL(fs[0])
+                // 如果文件读取成功就会触发下面的onload事件, this.result 来获取读取的文件数据，
+                //如果是图片，将返回base64格式的图片数据
+                fd.onload = function () {
+                    console.log(this.result)
+                    let oLi = document.createElement('li')
+                    let oImg = document.createElement('img')
+                    oImg.src = this.result
+                    oLi.appendChild(oImg)
+                    oUl.appendChild(oLi)
+                }
+            } else {
+                console.log('您拖的不是图片不支持哦')
+            }
+            //  多张上传以上循环一下即可
+
+            e.preventDefault()
+        }
+        /*执行的顺序： 
+        drop不触发的时候
+        dragstart > drag > dragenter > dragover > dragleave > dragend
+
+        drop被触发的时候（dragover要阻止默认事件）
+        dragstart > drag > dragenter > dragover > drop > dragend
+        */
+    </script>
+</body>
+
+</html>
