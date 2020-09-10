@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./json2.js"></script>
+    <!-- 引入json2.js的目的是为了解决有些浏览器不兼容jso的方法，特别ie浏览器 
+    https://www.json.org/json-en.html  找到jso2.js引入即可
+    -->
+</head>
+
+<body>
+    <script>
+        var str = `function show() {
+            console.log('字符串转成原生js')
+        }`
+        eval(str) // 字符串转成原生js,eval可以解析任何形式的字符串变成js
+        show()
+
+        // -----------------
+        // JSON.parse: 只能解析json形式的字符串变成js  安全性要高一点，此方法专门用来解析json的
+        //  let a = '{name: "hello"}' // name没有加双引号，解析不出来，因为不是一个严格的json，
+        //JSON.parse只能解析一个严格的json数据，name也要加双引号
+        let a = '{"name": "hello"}'
+        console.log(JSON.parse(a))
+
+        let b = {
+            name: 'abc'
+        }
+        console.log(JSON.stringify(b))
+
+        //JSON 可以用来复制对象
+        let o1 = {
+            say: 'hello'
+        }
+        // let o2 = o1  //直接复制共用了引用，一个改变，另一个跟着改变
+        let o2 = JSON.parse(JSON.stringify(o1)) // 此处实现了拷贝，不影响另外一个的值，可以是想深拷贝，但是会把函数过滤掉
+        o2.say = 'meet'
+        console.log(o1.say)
+        console.log(o2.say)
+    </script>
+</body>
+
+</html>

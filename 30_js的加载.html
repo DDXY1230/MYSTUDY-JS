@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="a.js" defer="defer"></script>
+    <!-- 加上derfer就是推迟加载，等到其他js和页面都加载完成了，才会加载 如果三个都加了defer
+    跟把所有的js文件放在底部一样的道理
+    -->
+    <script src="b.js"></script>
+    <script src="c.js"></script>
+
+    <!-- ------------------------ -->
+    <!-- 异步，各自之间没有关联，如果有依赖关系，就不能这样写 -->
+    <script src="x.js" async="async"></script>
+    <script src="y.js" async="async"></script>
+    <script src="z.js" async="async"></script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
