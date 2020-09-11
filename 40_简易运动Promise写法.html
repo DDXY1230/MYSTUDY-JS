@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #box1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background: red;
+    }
+</style>
+
+<body>
+    <div id="box1"></div>
+</body>
+<script>
+    let box1 = document.getElementById('box1')
+    // move(box1, 'left', 300)
+
+    function move(el, attr, val, cb) {
+        let now = parseFloat(getComputedStyle(el)[attr])
+        let speed = (val - now) / Math.abs(val - now)
+        return new Promise((resolve) => {
+            clearInterval(el.timer)
+            el.timer = setInterval(() => {
+                now += speed
+                el.style[attr] = now + 'px'
+                if (Math.abs(now - val) <= 0) {
+                    clearInterval(el.timer)
+                    resolve()
+                }
+            }, 10)
+        })
+    }
+    boxMove()
+
+    function boxMove() {
+        move(box1, 'left', 300).then(() => {
+            return move(box1, 'top', 300)
+        }).then(() => {
+            return move(box1, 'left', 0)
+        }).then(() => {
+            return move(box1, 'top', 0)
+        }).then(() => {
+            boxMove()
+        })
+    }
+</script>
+
+</html>
