@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            name: '太阳',
+            age: 10
+        }
+        Object.defineProperty(obj, "name", {
+            configurable: true, // 配置是否允许被删除 // 默认为true可删除，false不能删除
+            enumerable: true, // 是否可以枚举，默认true可以枚举
+            // writable: true, // 是否可写默认值是true
+            // 设置了set  和 get   那么writable就不应该出现，不然会报错，所以在这里注释掉
+            set(newVal) {
+                console.log('hhh')
+            },
+            get() {
+                return '你猜啊'
+            }
+        })
+        // delete obj.name
+        console.log(obj)
+        for (let k in obj) {
+            console.log(k)
+        }
+        obj.name = '月亮'
+        console.log(obj)
+    </script>
+</body>
+
+</html>

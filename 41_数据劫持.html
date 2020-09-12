@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            name: '',
+            get name() {
+                console.log('用户想要获取name')
+                return '我叫张三'
+            },
+            set name(newVal) {
+                console.log(newVal)
+                name = newVal
+            }
+        }
+        // console.log(obj)
+        console.log(obj.name) // 获取这个属性的时候会去先执行这个get方法，然后再获取到name，返回什么就拿到什么
+        // 修改属性
+        obj.name = '李四' // 这样修改不会变，因为get返回的还是 ‘我是张三’
+        console.log(obj.name) // 
+        // 如下修改可以更改
+        obj.name = '哈哈哈'
+        console.log(obj.name)
+    </script>
+</body>
+
+</html>
