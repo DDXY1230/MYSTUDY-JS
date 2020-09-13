@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" id='myFile'>
+    <input type="button" value="上传" id='myBtn'>
+    <script>
+        let oMyfile = document.getElementById('myFile')
+        let oBtn = document.getElementById('myBtn')
+        oBtn.onclick = function () {
+            console.log(oMyfile.files)
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+
+            }
+            // 上传文件一般用post
+            xhr.open('post', 'www.baidu.com', true);
+            xhr.setRequestHeader('X-Request-With', 'XMLHttpRequest')
+
+            let formData = new FormData()
+            formData.append('file', oMyfile.files[0])
+            xhr.send(formData)
+        }
+    </script>
+</body>
+
+</html>
