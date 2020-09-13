@@ -17,8 +17,20 @@
             console.log(oMyfile.files)
             let xhr = new XMLHttpRequest();
             xhr.onload = function () {
+                // 后端会返回的数据
+                console.log(this.responseText)
+                let d = JSON.parse(this.responseText)
 
             }
+            // 查看上传进度
+            let oUpload = xhr.upload
+            oUpload.onprogress = function(e) {
+                let ev = e || event
+                console.log(ev.total)// 文件的总大小
+                console.log(ev.loaded) // 当前已经上传的
+                //利用以上可以算一个进度条
+            }
+
             // 上传文件一般用post
             xhr.open('post', 'www.baidu.com', true);
             xhr.setRequestHeader('X-Request-With', 'XMLHttpRequest')
@@ -26,6 +38,8 @@
             let formData = new FormData()
             formData.append('file', oMyfile.files[0])
             xhr.send(formData)
+
+
         }
     </script>
 </body>
