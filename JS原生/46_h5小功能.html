@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            ;
+        }
+    </style>
+</head>
+
+<body>
+    <div contenteditable="true">div中的文本不可以编辑，但是加上contenteditable='true'就可以编辑了</div>
+    <!-- 语音输入, 很多不支持 -->
+    <input type="text" speech x-webkit-speech />
+    <input type=”text” x-webkit-speech=”x-webkit-speech” />
+</body>
+
+</html>

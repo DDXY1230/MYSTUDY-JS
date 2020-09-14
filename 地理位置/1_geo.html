@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="请求" id='btn'>
+    <textarea name="" id="t1" cols="30" rows="10"></textarea>
+</body>
+
+</html>
+<script>
+    let oInput = document.getElementById('btn')
+    let oT = document.getElementById('t1')
+    oInput.onclick = function () {
+        console.log(11)
+        navigator.geolocation.getCurrentPosition(function (position) {
+            console.log(position.coords.longitude)
+            oT.value += '经度：' + position.coords.longitude
+        })
+    }
+</script>

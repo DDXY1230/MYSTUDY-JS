@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    function* fn() {
+        yield new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('a')
+                resolve('1执行完')
+            }, 500)
+        });
+        yield new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('b')
+                resolve('2执行完')
+            }, 500)
+        });
+        yield new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('c')
+                resolve('3执行完')
+            }, 500)
+        });
+    }
+    let f = fn()
+    // console.log(f)
+    // console.log(f.next())
+    // console.log(f.next())
+    co(fn)
+
+    function co(fn) {
+        let f = fn()
+        next()
+
+        function next() {
+            let result = f.next()
+            if (!result.done) {
+                console.log(result)
+                //上一个异步执行完毕，再执行下一个异步
+                result.value.then((info) => {
+                    console.log('info', info)
+                    next()
+                })
+            }
+        }
+    }
+    // for (let fn of f) {
+    //     console.log(fn)
+    // }
+</script>

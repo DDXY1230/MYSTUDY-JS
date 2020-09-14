@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = ['a', '1', 'b', 'e', 'd']
+        let obj = {
+            a: 'aaa',
+            b: 'bbb',
+            c: 'ccc',
+            d: 'ddd'
+        }
+        // for...in...  如果循环的是数组，则attr打印出来的是数组的下标，如果循环的是对象，attr打印出来的是对象的键名key
+        for (let attr in obj) {
+            console.log(attr)
+        }
+        // for...of... 只能循环类数组，并且答应出来的i是数组的每个值，可迭代对象才能用for...of...
+        for (let i of arr) {
+            console.log(i)
+        }
+
+
+        // ----------------------------------------------------
+        // 以上obj没有实现迭代器，我们自定义实现
+        obj[Symbol.iterator] = function () {
+            let values = Object.values(obj)
+            let index = 0
+            return {
+                next() {
+                    if (index >= values.length) {
+                        return {
+                            value: '1', //循环过程中的值
+                            done: true // 循环是否完成
+                        }
+                    } else {
+                        return {
+                            value: values[index],
+                            done: false
+                        }
+                    }
+                }
+            }
+        }
+        for (let val of obj) {
+            console.log(val)
+        }
+    </script>
+</body>
+
+</html>
