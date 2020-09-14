@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            name: 'alice'
+        }
+        /*
+        defineProperty的默认值问题：
+        情况一：该属性已经在对象中定义过
+        configurable: true,
+        enumerable: true,
+        value: 'alice',
+        writable: true
+
+        情况二：该属性从来没有定义guo
+        configurable: false,
+        enumerable: false,
+        value: undefined,
+        writable: false
+        
+        
+        */
+        Object.defineProperty(obj, 'name', {})
+        // 对象的描述
+        console.log(Object.getOwnPropertyDescriptor(obj, 'name'))
+    </script>
+</body>
+
+</html>
