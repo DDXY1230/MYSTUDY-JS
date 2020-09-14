@@ -1,0 +1,17 @@
+// tsconfig.jsn 此文件默认情况下是跟src在同一级 
+// 终端tsc启动配置文件
+// ctrl + c  停止
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "watch": true,
+        "outDir": "./dist",
+        "strictNullChecks": true,
+        "noImplicitAny": true // 禁止出现隐式的any类型
+    },
+    "include": ["./src/**/*"]//include设置的目的是为
+    //了找到需要编译的文件，
+    //避免去找其他不必要的文件默认情况是src，
+    //两个**代表所有子目录
+    //一个*代表所有文件名称
+}
